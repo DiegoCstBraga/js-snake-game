@@ -67,8 +67,15 @@ function startGame(){
 	if(direction == 'up') snakeY -= box
 	if(direction == 'down') snakeY += box
 
-	// Retira a posição da calda cobra
-	snake.pop()
+	if(snakeX != food.x || snakeY != food.y){
+		// Retira a posição da calda cobra
+		snake.pop()
+
+	} else {
+		food.x = Math.floor(Math.random() * 15 + 1) * box,
+		food.y = Math.floor(Math.random() * 15 + 1) * box
+
+	}
 
 	// Define nova posição da cabeça da cobra
 	let newHead = {
