@@ -9,6 +9,7 @@ snake[0] = {
 
 let direction = 'right'
 
+// Define um local onde aparecerá a fruta
 let food = {
 	x: Math.floor(Math.random() * 15 + 1) * box,
 	y: Math.floor(Math.random() * 15 + 1) * box
@@ -33,6 +34,8 @@ function drawFood (){
 	context.fillRect(food.x, food.y, box, box)
 }
 
+
+// Obter a info de qual tecla foi adicionada para que mude a direção da cobra
 document.addEventListener('keydown', updateDirection)
 
 function updateDirection(event) {
@@ -44,6 +47,7 @@ function updateDirection(event) {
 }
 
 function startGame(){
+	// Define um loop para que quando a cobra chegar em alguma das bordas, ela apareça no outro lado
 	if(snake[0].x > 15 * box && direction == 'right') snake[0].x = 0
 	if(snake[0].x < 0 && direction == 'left') snake[0].x = 16 * box
 	if(snake[0].y > 15 * box && direction == 'down') snake[0].y = 0
@@ -53,20 +57,26 @@ function startGame(){
 	createSnake()
 	drawFood()
 
+	// Define que a cobra apareça inicialmente no meio do canvas
 	let snakeX = snake[0].x
 	let snakeY = snake[0].y
 
+	// Calcula a localização da cobra a partir do array
 	if(direction == 'right') snakeX += box
 	if(direction == 'left') snakeX -= box
 	if(direction == 'up') snakeY -= box
 	if(direction == 'down') snakeY += box
 
+	// Retira a posição da calda cobra
 	snake.pop()
+
+	// Define nova posição da cabeça da cobra
 	let newHead = {
 		x: snakeX,
 		y: snakeY
 	}
 
+	// Adiciona a posição da cobra ao inicio do array
 	snake.unshift(newHead)
 
 }
