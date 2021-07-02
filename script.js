@@ -46,12 +46,19 @@ function updateDirection(event) {
 	
 }
 
-function startGame(){
+function game(){
 	// Define um loop para que quando a cobra chegar em alguma das bordas, ela apareça no outro lado
 	if(snake[0].x > 15 * box && direction == 'right') snake[0].x = 0
 	if(snake[0].x < 0 && direction == 'left') snake[0].x = 16 * box
 	if(snake[0].y > 15 * box && direction == 'down') snake[0].y = 0
 	if(snake[0].y < 0 && direction == 'up') snake[0].y = 16	* box
+
+	for(let i = 1; i < snake.length; i++){
+		if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){
+			clearInterval(game)
+			alert('GAME OVER :(')
+		}
+	}
 
 	createBackground()
 	createSnake()
@@ -88,4 +95,4 @@ function startGame(){
 
 }
 
-let jogo = setInterval(startGame, 100)
+let jogo = setInterval(game, 100)
